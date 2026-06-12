@@ -69,6 +69,9 @@
   .chip{font-size:12px; color:var(--ink); background:rgba(91,157,255,.12); border:1px solid rgba(91,157,255,.3); padding:3px 9px; border-radius:8px; text-decoration:none}
   .chip:hover{border-color:var(--accent)}
   .chip.drive{background:rgba(123,224,200,.1); border-color:rgba(123,224,200,.3); color:#bff3e6}
+  .chip.gem{background:rgba(255,212,121,.1); border-color:rgba(255,212,121,.4); color:#ffe6ad}
+  .gem-badge{display:inline-block; font-size:10px; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
+    color:#1a1405; background:linear-gradient(90deg,#ffd479,#ffe9b8); padding:2px 7px; border-radius:6px; margin-left:8px; vertical-align:middle}
 
   .blocked .timeline{position:relative}
   .blocked-banner{display:flex; align-items:center; gap:12px; margin:6px 22px 0; padding:13px 16px; border-radius:12px;
@@ -101,6 +104,23 @@
   .checklist input{margin-top:3px; width:17px; height:17px; accent-color:var(--accent2)}
   .checklist .c{color:var(--muted); font-size:12.5px}
 
+  .fuel{background:rgba(20,29,58,.6); border:1px solid var(--line); border-radius:var(--radius); padding:20px 22px; margin-bottom:22px}
+  .fuel h2{margin:0 0 4px; font-size:20px}
+  .fuel .lead{color:var(--muted); font-size:13.5px; margin:0 0 16px}
+  .meal-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px}
+  .mcard{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px}
+  .mcard h4{margin:0 0 2px; font-size:15px; color:var(--accent2)}
+  .mcard .tot{font-size:12px; color:var(--warn); font-weight:700; margin-bottom:10px}
+  .mcard .m{padding:8px 0; border-bottom:1px dashed var(--line)}
+  .mcard .m:last-child{border-bottom:none}
+  .mcard .m .slot{font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:var(--muted)}
+  .mcard .m .dish{font-size:13.5px; color:var(--ink)}
+  .mcard .m .dish b{color:#bff3e6}
+  .macro{display:inline-flex; gap:6px; margin-top:4px}
+  .macro span{font-size:11px; padding:1px 7px; border-radius:6px}
+  .kcal{background:rgba(255,212,121,.12); color:var(--warn)}
+  .prot{background:rgba(123,224,200,.12); color:var(--accent2)}
+
   footer{text-align:center; color:var(--muted); font-size:13px; margin-top:46px}
   a.inline{color:var(--accent)}
   .legend{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; font-size:12.5px; color:var(--muted); margin-top:6px}
@@ -120,6 +140,7 @@
       <a class="pill" href="#sat">🌲 <b>Sat</b> · Sharma + Hike</a>
       <a class="pill" href="#sun">🌉 <b>Sun</b> · Mahek in SF</a>
       <a class="pill" href="#mon">🔒 <b>Mon</b> · Blocked AM + fly home</a>
+      <a class="pill" href="#fuel">⚡ <b>Fuel</b> · ~1500 kcal veg</a>
     </div>
     <div class="legend">
       <span><i class="ld" style="background:var(--sat)"></i>With Sharma</span>
@@ -159,27 +180,47 @@
         </div>
       </div>
       <div class="item">
-        <div class="time">12:30p</div>
-        <div class="what"><h3>Lunch before the hike</h3>
-          <p>Quick, good bite in San Mateo / Woodside before heading up into the hills.</p>
+        <div class="time">12:15p</div>
+        <div class="what"><h3>Fast power lunch en route ⚡</h3>
+          <p>Fuel up before a real hike — a high-protein veg bowl that stays light. See the <a class="inline" href="#fuel">fuel plan</a> for the exact order.</p>
+          <span class="meta"><a class="chip" href="#fuel">🥗 Sat lunch · ~470 kcal / 45g protein</a></span>
         </div>
       </div>
       <div class="item">
-        <div class="time">1:30p</div>
-        <div class="what"><h3>The outdoor block — redwoods + ridge views 🌲</h3>
-          <p><b>My pick</b> (real nature, easy to dial up or down): <b>Purisima Creek Redwoods</b> — shaded trails under big trees with ridge views over the valley, do a short loop or push higher if you both feel it. Prefer the classic skyline lookout? <b>Windy Hill</b> or the <b>Dish at Stanford</b> are gentler, view-first walks. If the mood swings city instead, jump straight to Sunday's SF list a day early.</p>
+        <div class="time">1:00p</div>
+        <div class="what"><h3>The ambitious hike — Purisima Creek Redwoods 🌲</h3>
+          <p>Go for the real thing: the <b>Whittemore Gulch → Soda Gulch → Harkins Ridge loop</b> (~6–7 mi, ~1,600 ft) — fern canyons, old-growth redwoods, then a ridge that opens to the ocean on a clear day. Tired legs? Bail to the lower out-and-back. <b>Hidden bit:</b> detour to the quiet <b>Soda Gulch</b> giants most people skip.</p>
           <span class="meta">
-            <a class="chip" href="https://maps.google.com/?q=Purisima+Creek+Redwoods" target="_blank" rel="noopener">🌲 Purisima Creek Redwoods</a>
-            <a class="chip" href="https://maps.google.com/?q=Windy+Hill+Open+Space+Preserve" target="_blank" rel="noopener">⛰️ Windy Hill</a>
-            <a class="chip" href="https://maps.google.com/?q=The+Dish+Stanford" target="_blank" rel="noopener">🥾 The Dish (easy)</a>
-            <span class="chip drive">🚗 Foster City → trailhead ≈ 30–40 min</span>
+            <a class="chip" href="https://maps.google.com/?q=Purisima+Creek+Redwoods+Higgins+Purisima+entrance" target="_blank" rel="noopener">🌲 Purisima Creek loop</a>
+            <a class="chip" href="https://maps.google.com/?q=Windy+Hill+Open+Space+Preserve" target="_blank" rel="noopener">⛰️ Windy Hill (shorter)</a>
+            <span class="chip drive">🚗 Foster City → trailhead ≈ 35–40 min</span>
+          </span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="time">3:45p</div>
+        <div class="what"><h3>Skyline ridge drive + Alice's pit stop <span class="gem-badge">hidden</span></h3>
+          <p>Roll back down via <b>Hwy 35 (Skyline Blvd)</b> — a ridgetop cruise through redwoods. Stop at <b>Alice's Restaurant</b>, the quirky crossroads biker landmark at Woodside, for a coffee and a breather. Pure locals' route.</p>
+          <span class="meta">
+            <a class="chip gem" href="https://maps.google.com/?q=Alice's+Restaurant+Woodside" target="_blank" rel="noopener">☕ Alice's Restaurant</a>
+            <a class="chip gem" href="https://maps.google.com/?q=Skyline+Boulevard+Woodside" target="_blank" rel="noopener">🛣️ Skyline ridge drive</a>
           </span>
         </div>
       </div>
       <div class="item">
         <div class="time">4:30p</div>
-        <div class="what"><h3>Sharma's shopping run — Costco + Sephora</h3>
-          <p>Knock it out today so Sunday stays free for him. <b>Sephora</b> at Hillsdale (San Mateo) is right on the way down; <b>Costco</b> in Redwood City is minutes from the trailheads.</p>
+        <div class="what"><h3>Pulgas Water Temple — the Peninsula's secret <span class="gem-badge">hidden</span></h3>
+          <p>A hushed Greco-Roman temple over the spot where Hetch Hetchy water surfaces after 160 miles — reflecting pool, columns, almost nobody there. Five quiet minutes that feel like another country. (If it's already closing, swap in the <b>Filoli</b> gardens nearby.)</p>
+          <span class="meta">
+            <a class="chip gem" href="https://maps.google.com/?q=Pulgas+Water+Temple" target="_blank" rel="noopener">🏛️ Pulgas Water Temple</a>
+            <a class="chip gem" href="https://maps.google.com/?q=Filoli+Woodside" target="_blank" rel="noopener">🌹 Filoli (alt)</a>
+          </span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="time">5:15p</div>
+        <div class="what"><h3>Sharma's run — Sephora + Costco, blitz it</h3>
+          <p>Done today so his Sunday stays clear. <b>Sephora</b> at Hillsdale, <b>Costco</b> in Redwood City — both right on the way back to Foster City.</p>
           <span class="meta">
             <a class="chip" href="https://maps.google.com/?q=Sephora+Hillsdale+Shopping+Center+San+Mateo" target="_blank" rel="noopener">💄 Sephora · Hillsdale</a>
             <a class="chip" href="https://maps.google.com/?q=Costco+Redwood+City" target="_blank" rel="noopener">🛒 Costco · Redwood City</a>
@@ -187,11 +228,26 @@
         </div>
       </div>
       <div class="item">
-        <div class="time">7:00p</div>
-        <div class="what"><h3>Dinner — best meal of the trip with Sharma</h3>
-          <p>San Mateo / Foster City has great range. Bridge it to a relaxed evening since you've got an early-ish, focused Sunday.</p>
+        <div class="time">6:45p</div>
+        <div class="what"><h3>Golden-hour bayfront walk <span class="gem-badge">hidden</span></h3>
+          <p>Squeeze in a calm sunset over the water at <b>Coyote Point</b> (San Mateo) or the <b>Foster City Bay Trail</b> a block from Sharma's — flat, breezy, the skyline going pink. Reset before dinner.</p>
+          <span class="meta">
+            <a class="chip gem" href="https://maps.google.com/?q=Coyote+Point+Recreation+Area" target="_blank" rel="noopener">🌅 Coyote Point</a>
+            <a class="chip gem" href="https://maps.google.com/?q=Foster+City+Bay+Trail" target="_blank" rel="noopener">🚶 Foster City Bay Trail</a>
+          </span>
         </div>
       </div>
+      <div class="item">
+        <div class="time">7:45p</div>
+        <div class="what"><h3>Dinner — best meal of the trip with Sharma</h3>
+          <p>High-protein and veg-friendly: paneer tikka + dal, or a big bowl — see the <a class="inline" href="#fuel">fuel plan</a> for picks that stay under budget. Relaxed evening; Sunday's an early, focused start.</p>
+          <span class="meta"><a class="chip" href="#fuel">🍽️ Sat dinner · ~520 kcal / 48g protein</a></span>
+        </div>
+      </div>
+    </div>
+    <div class="blocked-banner" style="background:repeating-linear-gradient(45deg,rgba(123,224,200,.07),rgba(123,224,200,.07) 12px,rgba(123,224,200,.13) 12px,rgba(123,224,200,.13) 24px);border-color:rgba(123,224,200,.4)">
+      <span class="ic">⚡</span>
+      <div><b style="color:var(--sat)">This is a full day — by design.</b> <span>If the hike runs long, drop Pulgas or the sunset walk; the shopping + dinner are the anchors. Carry water and a layer.</span></div>
     </div>
   </section>
 
@@ -215,35 +271,80 @@
         </div>
       </div>
       <div class="item">
-        <div class="time">12:30p</div>
+        <div class="time">12:00p</div>
         <div class="what"><h3>Drive into San Francisco — meet Mahek</h3>
-          <p>Mahek's downtown. Park once and walk the waterfront.</p>
+          <p>Mahek's downtown. Park once near the Embarcadero and do the day on foot + short hops.</p>
           <span class="meta"><span class="chip drive">🚗 Foster City → SF ≈ 25–35 min</span></span>
         </div>
       </div>
       <div class="item">
-        <div class="time">1:00p</div>
-        <div class="what"><h3>Ferry Building + Embarcadero</h3>
-          <p>Lunch at the Ferry Building marketplace, walk the Embarcadero — easy, scenic, very downtown.</p>
-          <span class="meta"><a class="chip" href="https://maps.google.com/?q=Ferry+Building+San+Francisco" target="_blank" rel="noopener">📍 Ferry Building</a></span>
-        </div>
-      </div>
-      <div class="item">
-        <div class="time">3:30p</div>
-        <div class="what"><h3>Pick one with Mahek</h3>
-          <p>Depending on the mood: <b>Lands End</b> for Golden Gate views, the <b>Painted Ladies / Alamo Square</b>, or <b>North Beach</b> for coffee + bookstores.</p>
+        <div class="time">12:30p</div>
+        <div class="what"><h3>Ferry Building lunch + Embarcadero</h3>
+          <p>Grab a high-protein veg bowl in the marketplace (see <a class="inline" href="#fuel">fuel plan</a>), eat by the water, then walk the Embarcadero north.</p>
           <span class="meta">
-            <a class="chip" href="https://maps.google.com/?q=Lands+End+Lookout+San+Francisco" target="_blank" rel="noopener">🌉 Lands End</a>
-            <a class="chip" href="https://maps.google.com/?q=Alamo+Square+San+Francisco" target="_blank" rel="noopener">🏠 Alamo Square</a>
+            <a class="chip" href="https://maps.google.com/?q=Ferry+Building+San+Francisco" target="_blank" rel="noopener">📍 Ferry Building</a>
+            <a class="chip" href="#fuel">🥗 ~480 kcal / 46g protein</a>
           </span>
         </div>
       </div>
       <div class="item">
-        <div class="time">7:00p</div>
-        <div class="what"><h3>Dinner with Mahek, then back to Foster City</h3>
-          <p>Wrap at a reasonable hour — Monday morning is early and important. Light prep review before bed.</p>
+        <div class="time">1:30p</div>
+        <div class="what"><h3>Filbert Steps + Grace Marchant Garden → Coit Tower <span class="gem-badge">hidden</span></h3>
+          <p>A secret wooden stairway climbing through a flower jungle and hidden cottages up to Coit Tower — wild parrots overhead, sweeping bay views at the top. One of SF's best-kept walks.</p>
+          <span class="meta">
+            <a class="chip gem" href="https://maps.google.com/?q=Filbert+Steps+San+Francisco" target="_blank" rel="noopener">🪜 Filbert Steps</a>
+            <a class="chip" href="https://maps.google.com/?q=Coit+Tower" target="_blank" rel="noopener">🗼 Coit Tower</a>
+          </span>
         </div>
       </div>
+      <div class="item">
+        <div class="time">2:45p</div>
+        <div class="what"><h3>North Beach — Caffè Trieste + City Lights <span class="gem-badge">hidden</span></h3>
+          <p>Espresso at <b>Caffè Trieste</b>, the original Beat-era café, then browse <b>City Lights</b> books. Two-block walk from the steps.</p>
+          <span class="meta">
+            <a class="chip gem" href="https://maps.google.com/?q=Caffe+Trieste+San+Francisco" target="_blank" rel="noopener">☕ Caffè Trieste</a>
+            <a class="chip" href="https://maps.google.com/?q=City+Lights+Booksellers" target="_blank" rel="noopener">📚 City Lights</a>
+          </span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="time">3:45p</div>
+        <div class="what"><h3>Palace of Fine Arts → the Wave Organ <span class="gem-badge">hidden</span></h3>
+          <p>Short drive to the dreamy <b>Palace of Fine Arts</b>, then walk the jetty to the <b>Wave Organ</b> — a sculpture of pipes that literally plays the bay's swells. Almost nobody knows it's there.</p>
+          <span class="meta">
+            <a class="chip" href="https://maps.google.com/?q=Palace+of+Fine+Arts" target="_blank" rel="noopener">🏛️ Palace of Fine Arts</a>
+            <a class="chip gem" href="https://maps.google.com/?q=Wave+Organ+San+Francisco" target="_blank" rel="noopener">🌊 Wave Organ</a>
+          </span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="time">4:45p</div>
+        <div class="what"><h3>Lands End trail + the hidden Labyrinth <span class="gem-badge">hidden</span></h3>
+          <p>Cliffside trail with full Golden Gate Bridge views, out to the <b>Lands End Labyrinth</b> at Eagle's Point — a stone maze on a bluff over the Pacific that most visitors walk right past.</p>
+          <span class="meta">
+            <a class="chip" href="https://maps.google.com/?q=Lands+End+Lookout+San+Francisco" target="_blank" rel="noopener">🌉 Lands End</a>
+            <a class="chip gem" href="https://maps.google.com/?q=Lands+End+Labyrinth" target="_blank" rel="noopener">🌀 Lands End Labyrinth</a>
+          </span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="time">6:15p</div>
+        <div class="what"><h3>Sunset at Tank Hill — locals' viewpoint <span class="gem-badge">hidden</span></h3>
+          <p>Skip the Twin Peaks crowds for <b>Tank Hill</b>, a small rocky outcrop with an arguably better 360° of the whole city as it lights up. Quiet, magic at golden hour.</p>
+          <span class="meta"><a class="chip gem" href="https://maps.google.com/?q=Tank+Hill+San+Francisco" target="_blank" rel="noopener">🌇 Tank Hill</a></span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="time">7:30p</div>
+        <div class="what"><h3>Dinner with Mahek, then back to Foster City</h3>
+          <p>High-protein veg picks (Greens, Shizen, or South Indian) in the <a class="inline" href="#fuel">fuel plan</a>. Wrap at a reasonable hour — Monday's early and important. Light prep review before bed.</p>
+          <span class="meta"><a class="chip" href="#fuel">🍽️ ~520 kcal / 45g protein</a></span>
+        </div>
+      </div>
+    </div>
+    <div class="blocked-banner" style="background:repeating-linear-gradient(45deg,rgba(157,123,255,.07),rgba(157,123,255,.07) 12px,rgba(157,123,255,.13) 12px,rgba(157,123,255,.13) 24px);border-color:rgba(157,123,255,.4)">
+      <span class="ic">⚡</span>
+      <div><b style="color:#c3aaff">Packed on purpose.</b> <span>That's a lot for one afternoon — keep what excites you and Mahek, drop the rest. The Wave Organ + Tank Hill are the sleeper hits if you only add two.</span></div>
     </div>
   </section>
 
@@ -342,6 +443,65 @@
       <p class="note" style="margin-top:16px">💬 <b>Want a live run-through?</b> I can play interviewer right here in chat — pick a theme and I'll ask, then give you feedback on structure, scope, and signal. Just say the word.</p>
     </div>
   </details>
+
+  <!-- FUEL -->
+  <section class="fuel" id="fuel">
+    <h2>⚡ Fuel · high-protein veg, eggs OK</h2>
+    <p class="lead">Each day lands around <b>~1,450–1,500 kcal</b> with <b>~140g protein</b> — lean, vegetarian, eggs allowed. Big-hike Saturday: drink water + electrolytes, and if you're starving add a 150-kcal protein shake (it's built into the budget). Numbers are estimates — order it your way.</p>
+    <div class="meal-grid">
+
+      <div class="mcard">
+        <h4>🌲 Saturday</h4>
+        <div class="tot">≈ 1,490 kcal · ~145g protein</div>
+        <div class="m"><div class="slot">Breakfast · at Sharma's</div>
+          <div class="dish"><b>3-egg + extra-whites veggie scramble</b>, spinach &amp; tomato, 1 slice rye</div>
+          <div class="macro"><span class="kcal">330 kcal</span><span class="prot">34g P</span></div></div>
+        <div class="m"><div class="slot">Lunch · en route to trail</div>
+          <div class="dish"><b>Tofu/edamame protein bowl</b> — Mendocino Farms, Sweetgreen or MIXT (San Mateo); double tofu, light dressing</div>
+          <div class="macro"><span class="kcal">470 kcal</span><span class="prot">45g P</span></div></div>
+        <div class="m"><div class="slot">Trail snack</div>
+          <div class="dish">Protein shake or 0% Greek yogurt + a few almonds</div>
+          <div class="macro"><span class="kcal">170 kcal</span><span class="prot">25g P</span></div></div>
+        <div class="m"><div class="slot">Dinner · with Sharma</div>
+          <div class="dish"><b>Paneer tikka + dal + salad</b> (dry, not creamy) — Curry Up Now or Saravana Bhavan, San Mateo</div>
+          <div class="macro"><span class="kcal">520 kcal</span><span class="prot">41g P</span></div></div>
+      </div>
+
+      <div class="mcard">
+        <h4>🌉 Sunday · SF</h4>
+        <div class="tot">≈ 1,460 kcal · ~140g protein</div>
+        <div class="m"><div class="slot">Breakfast · before prep</div>
+          <div class="dish"><b>Greek yogurt + berries + whey</b>, or a quick egg-white wrap</div>
+          <div class="macro"><span class="kcal">300 kcal</span><span class="prot">38g P</span></div></div>
+        <div class="m"><div class="slot">Lunch · Ferry Building</div>
+          <div class="dish"><b>Grain + tofu/falafel bowl</b> — DELICA or a poke spot, swap tofu in, beans + greens</div>
+          <div class="macro"><span class="kcal">480 kcal</span><span class="prot">46g P</span></div></div>
+        <div class="m"><div class="slot">Coffee · North Beach</div>
+          <div class="dish">Cappuccino w/ low-fat milk (skip the pastry)</div>
+          <div class="macro"><span class="kcal">120 kcal</span><span class="prot">8g P</span></div></div>
+        <div class="m"><div class="slot">Dinner · with Mahek</div>
+          <div class="dish"><b>Greens</b> (Fort Mason, iconic veg + bay views), <b>Shizen</b> vegan sushi, or South Indian — order the high-protein plates</div>
+          <div class="macro"><span class="kcal">520 kcal</span><span class="prot">45g P</span></div></div>
+      </div>
+
+      <div class="mcard">
+        <h4>🔒 Monday</h4>
+        <div class="tot">≈ 1,420 kcal · ~140g protein</div>
+        <div class="m"><div class="slot">Breakfast · before the review</div>
+          <div class="dish"><b>2 eggs + cottage cheese + fruit</b> — steady, light, no food coma</div>
+          <div class="macro"><span class="kcal">340 kcal</span><span class="prot">36g P</span></div></div>
+        <div class="m"><div class="slot">Lunch · after, decompress</div>
+          <div class="dish"><b>Big veg + tofu/paneer bowl</b> or burrito bowl (black beans, no rice-heavy), Sweetgreen / Curry Up Now</div>
+          <div class="macro"><span class="kcal">540 kcal</span><span class="prot">50g P</span></div></div>
+        <div class="m"><div class="slot">Airport · pre-flight</div>
+          <div class="dish">Protein shake + edamame, or a veg protein box at SJC</div>
+          <div class="macro"><span class="kcal">340 kcal</span><span class="prot">38g P</span></div></div>
+        <div class="m"><div class="slot">Travel tip</div>
+          <div class="dish">Pack 1–2 whey/plant protein sachets — saves you on calories and a scramble in transit</div></div>
+      </div>
+
+    </div>
+  </section>
 
   <!-- CHECKLIST -->
   <section class="checklist">
