@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex,nofollow" />
+<title>Bay Area Weekend · Jun 13–15</title>
+<meta name="description" content="A private weekend plan for the Bay Area." />
+<style>
+  :root{
+    --bg:#0b1020; --bg2:#0f1630; --card:#141d3a; --card2:#18234a;
+    --ink:#eef2ff; --muted:#9fb0d4; --line:#26315c;
+    --accent:#5b9dff; --accent2:#7be0c8; --warn:#ffd479; --lock:#ff8f8f;
+    --sat:#7be0c8; --sun:#9d7bff; --mon:#ff9a76;
+    --radius:18px; --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink); line-height:1.55;
+    background:
+      radial-gradient(1200px 600px at 80% -10%, #1b2a5e 0%, transparent 55%),
+      radial-gradient(900px 500px at -10% 10%, #163a45 0%, transparent 50%),
+      linear-gradient(180deg,var(--bg),var(--bg2));
+    background-attachment:fixed; min-height:100vh;
+  }
+  .wrap{max-width:980px; margin:0 auto; padding:28px 20px 80px}
+  header.hero{
+    text-align:center; padding:46px 16px 22px;
+  }
+  .eyebrow{letter-spacing:.22em; text-transform:uppercase; font-size:12px; color:var(--accent2); font-weight:700}
+  h1{font-size:clamp(30px,6vw,52px); margin:.18em 0 .12em; line-height:1.05;
+     background:linear-gradient(90deg,#bcd3ff,#8fe9d2); -webkit-background-clip:text; background-clip:text; color:transparent}
+  .sub{color:var(--muted); font-size:clamp(15px,2.4vw,18px); margin:0 auto; max-width:620px}
+  .pills{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:22px 0 6px}
+  .pill{background:var(--card); border:1px solid var(--line); padding:9px 14px; border-radius:999px; font-size:13px; color:var(--ink); text-decoration:none; transition:.18s}
+  .pill:hover{transform:translateY(-2px); border-color:var(--accent)}
+  .pill b{color:var(--accent2)}
+
+  .quick{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin:26px 0}
+  .qcard{background:linear-gradient(180deg,var(--card),var(--card2)); border:1px solid var(--line); border-radius:14px; padding:14px 16px}
+  .qcard .k{font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.08em}
+  .qcard .v{font-size:18px; font-weight:700; margin-top:3px}
+  .qcard .v small{font-weight:500; color:var(--muted); font-size:13px}
+
+  section{margin:34px 0}
+  .day{background:rgba(20,29,58,.72); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; margin-bottom:22px}
+  .day-head{display:flex; align-items:center; gap:14px; padding:18px 22px; border-bottom:1px solid var(--line); position:relative}
+  .day-head .dot{width:12px; height:12px; border-radius:50%}
+  .day-head h2{margin:0; font-size:22px}
+  .day-head .date{color:var(--muted); font-size:14px; margin-left:auto; text-align:right}
+  .sat .dot{background:var(--sat)} .sun .dot{background:var(--sun)} .mon .dot{background:var(--mon)}
+  .sat .day-head{box-shadow:inset 4px 0 0 var(--sat)}
+  .sun .day-head{box-shadow:inset 4px 0 0 var(--sun)}
+  .mon .day-head{box-shadow:inset 4px 0 0 var(--mon)}
+  .tag{font-size:11px; padding:3px 9px; border-radius:999px; font-weight:700; letter-spacing:.04em}
+  .tag.with{background:rgba(123,224,200,.16); color:var(--sat); border:1px solid rgba(123,224,200,.4)}
+  .tag.sf{background:rgba(157,123,255,.16); color:#c3aaff; border:1px solid rgba(157,123,255,.4)}
+  .tag.lock{background:rgba(255,143,143,.14); color:var(--lock); border:1px solid rgba(255,143,143,.45)}
+
+  .timeline{padding:8px 22px 22px}
+  .item{display:grid; grid-template-columns:78px 1fr; gap:14px; padding:14px 0; border-bottom:1px dashed var(--line)}
+  .item:last-child{border-bottom:none}
+  .time{color:var(--accent2); font-weight:700; font-size:14px; padding-top:1px}
+  .what h3{margin:0 0 3px; font-size:16px}
+  .what p{margin:0; color:var(--muted); font-size:14px}
+  .what .meta{display:inline-flex; gap:8px; flex-wrap:wrap; margin-top:8px}
+  .chip{font-size:12px; color:var(--ink); background:rgba(91,157,255,.12); border:1px solid rgba(91,157,255,.3); padding:3px 9px; border-radius:8px; text-decoration:none}
+  .chip:hover{border-color:var(--accent)}
+  .chip.drive{background:rgba(123,224,200,.1); border-color:rgba(123,224,200,.3); color:#bff3e6}
+
+  .blocked .timeline{position:relative}
+  .blocked-banner{display:flex; align-items:center; gap:12px; margin:6px 22px 0; padding:13px 16px; border-radius:12px;
+    background:repeating-linear-gradient(45deg,rgba(255,143,143,.08),rgba(255,143,143,.08) 12px,rgba(255,143,143,.14) 12px,rgba(255,143,143,.14) 24px);
+    border:1px solid rgba(255,143,143,.4)}
+  .blocked-banner .ic{font-size:20px}
+  .blocked-banner b{color:var(--lock)}
+  .blocked-banner span{color:var(--muted); font-size:13px}
+
+  /* private / discreet */
+  details.private{margin:26px 0; background:linear-gradient(180deg,#101937,#0d1530); border:1px dashed var(--line); border-radius:var(--radius)}
+  details.private summary{cursor:pointer; list-style:none; padding:16px 20px; font-weight:700; display:flex; align-items:center; gap:10px; color:var(--muted)}
+  details.private summary::-webkit-details-marker{display:none}
+  details.private[open] summary{border-bottom:1px solid var(--line); color:var(--ink)}
+  details.private .body{padding:8px 22px 22px}
+  .lockico{font-size:16px}
+  .note{font-size:13px; color:var(--muted); margin:2px 0 14px}
+  .prep-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px}
+  .prep{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px}
+  .prep h4{margin:0 0 8px; font-size:15px; color:var(--accent2)}
+  .prep ul{margin:0; padding-left:18px; color:var(--muted); font-size:13.5px}
+  .prep ul li{margin:5px 0}
+  .star{display:grid; grid-template-columns:auto 1fr; gap:6px 12px; font-size:13.5px; margin-top:6px}
+  .star b{color:var(--ink)}
+
+  .checklist{background:rgba(20,29,58,.6); border:1px solid var(--line); border-radius:var(--radius); padding:18px 22px}
+  .checklist h2{margin:0 0 12px; font-size:20px}
+  .checklist label{display:flex; gap:10px; align-items:flex-start; padding:7px 0; font-size:14.5px; color:var(--ink); cursor:pointer; border-bottom:1px dashed var(--line)}
+  .checklist label:last-child{border-bottom:none}
+  .checklist input{margin-top:3px; width:17px; height:17px; accent-color:var(--accent2)}
+  .checklist .c{color:var(--muted); font-size:12.5px}
+
+  footer{text-align:center; color:var(--muted); font-size:13px; margin-top:46px}
+  a.inline{color:var(--accent)}
+  .legend{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; font-size:12.5px; color:var(--muted); margin-top:6px}
+  .legend span{display:inline-flex; align-items:center; gap:6px}
+  .ld{width:10px;height:10px;border-radius:50%}
+  @media (max-width:520px){ .item{grid-template-columns:64px 1fr} .day-head .date{font-size:12px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Private Itinerary · Not Shared Publicly</div>
+    <h1>Bay Area Weekend</h1>
+    <p class="sub">Three days on the Peninsula — coast, the city, good people, and one big thing on Monday. Fly in Saturday, fly home Monday night.</p>
+    <div class="pills">
+      <a class="pill" href="#sat">🌊 <b>Sat</b> · Sharma + Coast</a>
+      <a class="pill" href="#sun">🌉 <b>Sun</b> · Mahek in SF</a>
+      <a class="pill" href="#mon">🔒 <b>Mon</b> · Blocked AM + fly home</a>
+    </div>
+    <div class="legend">
+      <span><i class="ld" style="background:var(--sat)"></i>With Sharma</span>
+      <span><i class="ld" style="background:var(--sun)"></i>SF / Mahek</span>
+      <span><i class="ld" style="background:var(--mon)"></i>Reserved time</span>
+    </div>
+  </header>
+
+  <div class="quick">
+    <div class="qcard"><div class="k">Land</div><div class="v">10:30a <small>SJC, Sat</small></div></div>
+    <div class="qcard"><div class="k">Base</div><div class="v">Foster City <small>w/ Sharma</small></div></div>
+    <div class="qcard"><div class="k">Wheels</div><div class="v">Rental <small>pickup at SJC</small></div></div>
+    <div class="qcard"><div class="k">Fly home</div><div class="v">10:00p <small>SJC, Mon</small></div></div>
+  </div>
+
+  <!-- SATURDAY -->
+  <section id="sat" class="day sat">
+    <div class="day-head">
+      <span class="dot"></span>
+      <h2>Saturday</h2>
+      <span class="tag with">Sharma day</span>
+      <span class="date">Jun 13 · the only full day with Sharma — make it count</span>
+    </div>
+    <div class="timeline">
+      <div class="item">
+        <div class="time">10:30a</div>
+        <div class="what"><h3>Land at SJC + grab the rental</h3>
+          <p>Expect ~30–45 min for bags and the rental counter. Aim to be rolling by ~11:30a.</p>
+          <span class="meta"><a class="chip" href="https://maps.google.com/?q=San+Jose+International+Airport" target="_blank" rel="noopener">📍 SJC</a></span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="time">~11:45a</div>
+        <div class="what"><h3>Drive to Foster City, drop bags</h3>
+          <p>Settle in at Sharma's, freshen up, then head out for the day.</p>
+          <span class="meta"><span class="chip drive">🚗 SJC → Foster City ≈ 25–30 min</span></span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="time">12:30p</div>
+        <div class="what"><h3>Lunch on the way to the coast</h3>
+          <p>Quick, good bite in San Mateo / Half Moon Bay before the ocean stretch.</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="time">1:30p</div>
+        <div class="what"><h3>The outdoor block — Half Moon Bay coast 🌊</h3>
+          <p><b>My pick</b> (it's close, low-effort, and unmistakably "Bay Area"): the <b>Cowell–Purisima coastal trail</b> — flat clifftop walk over the Pacific, do as much or as little as you feel. Add <b>Mavericks Beach</b> for the dramatic surf view. If Sharma wants more trees instead, swap to <b>Purisima Creek Redwoods</b> (15 min inland).</p>
+          <span class="meta">
+            <a class="chip" href="https://maps.google.com/?q=Cowell+Purisima+Trail" target="_blank" rel="noopener">🥾 Cowell–Purisima Trail</a>
+            <a class="chip" href="https://maps.google.com/?q=Mavericks+Beach+Half+Moon+Bay" target="_blank" rel="noopener">🌊 Mavericks Beach</a>
+            <a class="chip" href="https://maps.google.com/?q=Purisima+Creek+Redwoods" target="_blank" rel="noopener">🌲 Redwoods (alt)</a>
+            <span class="chip drive">🚗 Foster City → coast ≈ 35–40 min</span>
+          </span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="time">4:30p</div>
+        <div class="what"><h3>Sharma's shopping run — Costco + Sephora</h3>
+          <p>Knock it out today so Sunday stays free for him. <b>Sephora</b> at Hillsdale (San Mateo) is right on the way back; <b>Costco</b> in South SF or Redwood City.</p>
+          <span class="meta">
+            <a class="chip" href="https://maps.google.com/?q=Sephora+Hillsdale+Shopping+Center+San+Mateo" target="_blank" rel="noopener">💄 Sephora · Hillsdale</a>
+            <a class="chip" href="https://maps.google.com/?q=Costco+Redwood+City" target="_blank" rel="noopener">🛒 Costco · Redwood City</a>
+          </span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="time">7:00p</div>
+        <div class="what"><h3>Dinner — best meal of the trip with Sharma</h3>
+          <p>San Mateo / Foster City has great range. Bridge it to a relaxed evening since you've got an early-ish, focused Sunday.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUNDAY -->
+  <section id="sun" class="day sun">
+    <div class="day-head">
+      <span class="dot"></span>
+      <h2>Sunday</h2>
+      <span class="tag sf">SF · Mahek</span>
+      <span class="date">Jun 14 · Sharma's booked today — city day with Mahek</span>
+    </div>
+    <div class="blocked-banner" style="background:repeating-linear-gradient(45deg,rgba(157,123,255,.08),rgba(157,123,255,.08) 12px,rgba(157,123,255,.16) 12px,rgba(157,123,255,.16) 24px);border-color:rgba(157,123,255,.4)">
+      <span class="ic">📌</span>
+      <div><b style="color:#c3aaff">Morning is for you, quietly.</b> <span>Hold the first part of the day for the Monday review prep — details in the private section below. Then head into the city.</span></div>
+    </div>
+    <div class="timeline">
+      <div class="item">
+        <div class="time">9:00a</div>
+        <div class="what"><h3>Focused prep block (private)</h3>
+          <p>2–3 quiet hours before the city. See <a class="inline" href="#private">the private section</a> for the plan. Coffee, headphones, done by lunch.</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="time">12:30p</div>
+        <div class="what"><h3>Drive into San Francisco — meet Mahek</h3>
+          <p>Mahek's downtown. Park once and walk the waterfront.</p>
+          <span class="meta"><span class="chip drive">🚗 Foster City → SF ≈ 25–35 min</span></span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="time">1:00p</div>
+        <div class="what"><h3>Ferry Building + Embarcadero</h3>
+          <p>Lunch at the Ferry Building marketplace, walk the Embarcadero — easy, scenic, very downtown.</p>
+          <span class="meta"><a class="chip" href="https://maps.google.com/?q=Ferry+Building+San+Francisco" target="_blank" rel="noopener">📍 Ferry Building</a></span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="time">3:30p</div>
+        <div class="what"><h3>Pick one with Mahek</h3>
+          <p>Depending on the mood: <b>Lands End</b> for Golden Gate views, the <b>Painted Ladies / Alamo Square</b>, or <b>North Beach</b> for coffee + bookstores.</p>
+          <span class="meta">
+            <a class="chip" href="https://maps.google.com/?q=Lands+End+Lookout+San+Francisco" target="_blank" rel="noopener">🌉 Lands End</a>
+            <a class="chip" href="https://maps.google.com/?q=Alamo+Square+San+Francisco" target="_blank" rel="noopener">🏠 Alamo Square</a>
+          </span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="time">7:00p</div>
+        <div class="what"><h3>Dinner with Mahek, then back to Foster City</h3>
+          <p>Wrap at a reasonable hour — Monday morning is early and important. Light prep review before bed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MONDAY -->
+  <section id="mon" class="day mon blocked">
+    <div class="day-head">
+      <span class="dot"></span>
+      <h2>Monday</h2>
+      <span class="tag lock">🔒 Reserved</span>
+      <span class="date">Jun 15 · morning blocked · fly home tonight</span>
+    </div>
+    <div class="blocked-banner">
+      <span class="ic">🔒</span>
+      <div><b>Senior Leadership Review — very important. Do not book over this.</b> <span>Hard block, full focus. Hands off until it's done.</span></div>
+    </div>
+    <div class="timeline">
+      <div class="item">
+        <div class="time">7:30a</div>
+        <div class="what"><h3>Quiet start, set up, coffee</h3>
+          <p>Good light, stable wifi, water within reach, phone on silent. Be ready 15 min early.</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="time">8:00a–12:00p</div>
+        <div class="what"><h3>🔒 Senior Leadership Review · 4 hours</h3>
+          <p>Blocked. No driving, no errands, no plans. Everything else today bends around this.</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="time">12:30p</div>
+        <div class="what"><h3>Exhale + late lunch</h3>
+          <p>Decompress. If there's energy, one light thing — a short Bay walk or a final coffee with whoever's around.</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="time">~6:30p</div>
+        <div class="what"><h3>Return rental + head to SJC</h3>
+          <p>Fuel up, drop the car, target security by ~8:00p for a 10:00p flight.</p>
+          <span class="meta"><span class="chip drive">🚗 Foster City → SJC ≈ 30 min</span></span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="time">10:00p</div>
+        <div class="what"><h3>✈️ Fly home</h3>
+          <p>That's a wrap on the Bay.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVATE PREP -->
+  <details class="private" id="private">
+    <summary><span class="lockico">🔒</span> Private · Leadership Review prep <span style="font-weight:400;color:var(--muted);font-size:13px">(just for you — tap to open)</span></summary>
+    <div class="body">
+      <p class="note">Discreet on purpose. Nobody needs to know what Monday morning is — on the surface it's just a "very important senior leadership review." Here's how to walk in calm and sharp.</p>
+      <div class="prep-grid">
+        <div class="prep">
+          <h4>The night before</h4>
+          <ul>
+            <li>Pick your <b>6 strongest stories</b> and nothing more — one per theme.</li>
+            <li>Re-read your own notes once; don't cram new material.</li>
+            <li>Lay out clothes, test wifi/camera, charge everything.</li>
+            <li>Sleep &gt; one more rehearsal. Be done by ~11p.</li>
+          </ul>
+        </div>
+        <div class="prep">
+          <h4>Themes to have ready</h4>
+          <ul>
+            <li>Led through ambiguity / set a vision</li>
+            <li>Hard call with incomplete data</li>
+            <li>Conflict — peer or up the chain</li>
+            <li>Scaled a team / grew people</li>
+            <li>A real failure + what changed after</li>
+            <li>Influence without authority</li>
+          </ul>
+        </div>
+        <div class="prep">
+          <h4>STAR, tight</h4>
+          <div class="star">
+            <b>S/T</b><span>15 sec of context — stakes &amp; your role</span>
+            <b>A</b><span>60–90 sec — <i>what YOU did</i>, the tradeoffs, the why</span>
+            <b>R</b><span>Numbers + what you'd repeat / change</span>
+          </div>
+          <p class="note" style="margin-top:10px">At senior level they're listening for judgment, ownership, and scope — not activity. Say "I decided," not "we tried."</p>
+        </div>
+        <div class="prep">
+          <h4>Morning of</h4>
+          <ul>
+            <li>Light food, water, a short walk to burn nerves.</li>
+            <li>Two questions ready to ask <i>them</i>.</li>
+            <li>Slow your first answer down by 20%.</li>
+            <li>It's a conversation between peers — not a test.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note" style="margin-top:16px">💬 <b>Want a live run-through?</b> I can play interviewer right here in chat — pick a theme and I'll ask, then give you feedback on structure, scope, and signal. Just say the word.</p>
+    </div>
+  </details>
+
+  <!-- CHECKLIST -->
+  <section class="checklist">
+    <h2>Don't-forget checklist</h2>
+    <label><input type="checkbox"> <span>Rental confirmation + driver's license<span class="c"> · keep ready at the SJC counter</span></span></label>
+    <label><input type="checkbox"> <span>Sharma's Costco + Sephora list<span class="c"> · do it Saturday, frees up his Sunday</span></span></label>
+    <label><input type="checkbox"> <span>Layers + comfortable shoes<span class="c"> · coast and SF run cold and windy even in June</span></span></label>
+    <label><input type="checkbox"> <span>Confirm Sunday window with Mahek (SF downtown)<span class="c"> · afternoon onward</span></span></label>
+    <label><input type="checkbox"> <span>🔒 Monday 8a–12p held + tested setup<span class="c"> · wifi, camera, charger, quiet room</span></span></label>
+    <label><input type="checkbox"> <span>Refuel + return rental before SJC<span class="c"> · security by ~8:00p</span></span></label>
+  </section>
+
+  <footer>
+    Built as a private plan · Jun 13–15, 2026 · <span style="opacity:.7">not indexed, not shared</span>
+  </footer>
+</div>
+</body>
+</html>
