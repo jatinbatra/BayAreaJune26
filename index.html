@@ -127,12 +127,74 @@
   .legend span{display:inline-flex; align-items:center; gap:6px}
   .ld{width:10px;height:10px;border-radius:50%}
   @media (max-width:520px){ .item{grid-template-columns:64px 1fr} .day-head .date{font-size:12px} }
+  /* ---------- SF theme + live engine ---------- */
+  :root{ --sf:#e85a2a; --sf2:#ff7a45; --fog:#c9d4e8; }
+
+  /* Golden Gate silhouette under the hero */
+  .bridge{display:block; width:100%; max-width:980px; margin:-6px auto 0; height:120px; opacity:.9}
+  .bridge .cable{fill:none; stroke:var(--sf); stroke-width:2.4; opacity:.85}
+  .bridge .tower{fill:var(--sf); opacity:.92}
+  .bridge .deck{stroke:var(--sf); stroke-width:3; opacity:.9}
+  .bridge .hang{stroke:var(--sf); stroke-width:1; opacity:.5}
+  .hero{position:relative}
+  .fog{position:absolute; left:0; right:0; bottom:-30px; height:120px; pointer-events:none;
+    background:radial-gradient(60% 80% at 50% 100%, rgba(201,212,232,.18), transparent 70%);
+    filter:blur(6px); animation:drift 18s ease-in-out infinite alternate}
+  @keyframes drift{from{transform:translateX(-18px)} to{transform:translateX(18px)}}
+  .sun-orb{position:absolute; top:30px; right:14%; width:78px; height:78px; border-radius:50%;
+    background:radial-gradient(circle at 50% 50%, #ffd9a8, #ff8a4c 60%, rgba(255,138,76,0) 72%);
+    filter:blur(.5px); opacity:.8; pointer-events:none}
+
+  /* live "now / next" sticky bar */
+  .live{position:sticky; top:10px; z-index:30; margin:0 0 8px;
+    display:flex; align-items:center; gap:14px; padding:14px 18px; border-radius:16px;
+    background:linear-gradient(180deg, rgba(26,18,10,.92), rgba(18,14,28,.92));
+    border:1px solid rgba(232,90,42,.5); box-shadow:0 12px 30px rgba(0,0,0,.45); backdrop-filter:blur(8px)}
+  .live .beacon{position:relative; width:14px; height:14px; flex:0 0 auto}
+  .live .beacon i{position:absolute; inset:0; border-radius:50%; background:var(--sf2)}
+  .live .beacon::after{content:""; position:absolute; inset:0; border-radius:50%; background:var(--sf2);
+    animation:ping 1.8s cubic-bezier(0,0,.2,1) infinite}
+  @keyframes ping{0%{transform:scale(1); opacity:.7} 80%,100%{transform:scale(3.4); opacity:0}}
+  .live .lt{flex:1; min-width:0}
+  .live .nowlbl{font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--sf2); font-weight:800}
+  .live .nowlbl .clock{color:var(--fog); margin-left:6px; letter-spacing:.06em}
+  .live .nowact{font-size:16px; font-weight:700; margin:1px 0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .live .nextact{font-size:12.5px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .live .nextact b{color:var(--accent2)}
+  .live .gobtn{flex:0 0 auto; font-size:12px; font-weight:700; color:#1a1405; text-decoration:none;
+    background:linear-gradient(90deg,#ffb37a,#ff7a45); padding:8px 12px; border-radius:10px; white-space:nowrap}
+  .live .gobtn:hover{filter:brightness(1.08)}
+  @media (max-width:560px){ .live .gobtn{display:none} .live .nowact{font-size:14.5px} }
+
+  /* current stop highlight */
+  .item.current{position:relative; background:linear-gradient(90deg, rgba(232,90,42,.12), transparent 70%);
+    border-radius:12px; box-shadow:inset 3px 0 0 var(--sf2); padding-left:10px; margin-left:-10px}
+  .item.current .time{color:var(--sf2)}
+  .now-badge{display:inline-block; font-size:10px; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
+    color:#1a1405; background:linear-gradient(90deg,#ffb37a,#ff7a45); padding:2px 8px; border-radius:6px; margin-left:8px;
+    vertical-align:middle; animation:pulse 1.8s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1} 50%{opacity:.55}}
+  .item.past{opacity:.5}
+  .item.past .time{color:var(--muted)}
+
 </style>
 </head>
 <body>
 <div class="wrap">
 
+  <!-- LIVE NOW / NEXT (driven by the real clock, PT) -->
+  <div class="live" id="live">
+    <div class="beacon"><i></i></div>
+    <div class="lt">
+      <div class="nowlbl">Right now <span class="clock" id="clock">· · ·</span></div>
+      <div class="nowact" id="nowAct">Loading the plan…</div>
+      <div class="nextact" id="nextAct"></div>
+    </div>
+    <a class="gobtn" id="goNow" href="#">Go to now ↓</a>
+  </div>
+
   <header class="hero">
+    <div class="sun-orb"></div>
     <div class="eyebrow">Private Itinerary · Not Shared Publicly</div>
     <h1>Bay Area Weekend</h1>
     <p class="sub">Three days on the Peninsula, redwoods, the city, good people, and one big thing on Monday. Fly in Saturday, fly home Monday night.</p>
@@ -147,7 +209,23 @@
       <span><i class="ld" style="background:var(--sun)"></i>SF / Mahek</span>
       <span><i class="ld" style="background:var(--mon)"></i>Reserved time</span>
     </div>
+    <div class="fog"></div>
   </header>
+
+  <!-- Golden Gate silhouette -->
+  <svg class="bridge" viewBox="0 0 980 120" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+    <line class="deck" x1="0" y1="92" x2="980" y2="92"/>
+    <path class="cable" d="M0 56 Q150 96 300 40 T600 40 Q760 96 980 56"/>
+    <rect class="tower" x="296" y="12" width="9" height="80"/>
+    <rect class="tower" x="596" y="12" width="9" height="80"/>
+    <line class="hang" x1="60" y1="74" x2="60" y2="92"/><line class="hang" x1="120" y1="62" x2="120" y2="92"/>
+    <line class="hang" x1="180" y1="54" x2="180" y2="92"/><line class="hang" x1="240" y1="46" x2="240" y2="92"/>
+    <line class="hang" x1="360" y1="46" x2="360" y2="92"/><line class="hang" x1="420" y1="42" x2="420" y2="92"/>
+    <line class="hang" x1="480" y1="40" x2="480" y2="92"/><line class="hang" x1="540" y1="42" x2="540" y2="92"/>
+    <line class="hang" x1="660" y1="48" x2="660" y2="92"/><line class="hang" x1="720" y1="54" x2="720" y2="92"/>
+    <line class="hang" x1="780" y1="62" x2="780" y2="92"/><line class="hang" x1="840" y1="72" x2="840" y2="92"/>
+    <line class="hang" x1="900" y1="80" x2="900" y2="92"/>
+  </svg>
 
   <div class="quick">
     <div class="qcard"><div class="k">Land</div><div class="v">10:30a <small>SJC, Sat</small></div></div>
@@ -165,28 +243,28 @@
       <span class="date">Jun 13 · the only full day with Sharma, make it count</span>
     </div>
     <div class="timeline">
-      <div class="item">
+      <div class="item" data-start="2026-06-13T10:30:00-07:00">
         <div class="time">10:30a</div>
         <div class="what"><h3>Land at SJC + grab the rental</h3>
           <p>Expect ~30–45 min for bags and the rental counter. Aim to be rolling by ~11:30a.</p>
           <span class="meta"><a class="chip" href="https://maps.google.com/?q=San+Jose+International+Airport" target="_blank" rel="noopener">📍 SJC</a></span>
         </div>
       </div>
-      <div class="item">
+      <div class="item" data-start="2026-06-13T11:45:00-07:00">
         <div class="time">~11:45a</div>
         <div class="what"><h3>Drive to Foster City, drop bags</h3>
           <p>Settle in at Sharma's, freshen up, then head out for the day.</p>
           <span class="meta"><span class="chip drive">🚗 SJC → Foster City ≈ 25–30 min</span></span>
         </div>
       </div>
-      <div class="item">
+      <div class="item" data-start="2026-06-13T12:15:00-07:00">
         <div class="time">12:15p</div>
         <div class="what"><h3>Fast power lunch en route ⚡</h3>
           <p>Fuel up before a real hike at <b>CAVA</b> (Bridgepointe, San Mateo), a high-protein bowl that stays light. See the <a class="inline" href="#fuel">fuel plan</a> for the exact order.</p>
           <span class="meta"><a class="chip" href="#fuel">🥗 Sat lunch · ~470 kcal / 45g protein</a></span>
         </div>
       </div>
-      <div class="item">
+      <div class="item" data-start="2026-06-13T13:00:00-07:00">
         <div class="time">1:00p</div>
         <div class="what"><h3>The ambitious hike, Purisima Creek Redwoods 🌲</h3>
           <p>Go for the real thing: the <b>Whittemore Gulch → Soda Gulch → Harkins Ridge loop</b> (~6–7 mi, ~1,600 ft), fern canyons, old-growth redwoods, then a ridge that opens to the ocean on a clear day. Tired legs? Bail to the lower out-and-back. <b>Hidden bit:</b> detour to the quiet <b>Soda Gulch</b> giants most people skip.</p>
@@ -197,7 +275,7 @@
           </span>
         </div>
       </div>
-      <div class="item">
+      <div class="item" data-start="2026-06-13T15:45:00-07:00">
         <div class="time">3:45p</div>
         <div class="what"><h3>Skyline ridge drive + Alice's pit stop <span class="gem-badge">hidden</span></h3>
           <p>Roll back down via <b>Hwy 35 (Skyline Blvd)</b>, a ridgetop cruise through redwoods. Stop at <b>Alice's Restaurant</b>, the quirky crossroads biker landmark at Woodside, for a coffee and a breather. Pure locals' route.</p>
@@ -207,7 +285,7 @@
           </span>
         </div>
       </div>
-      <div class="item">
+      <div class="item" data-start="2026-06-13T16:30:00-07:00">
         <div class="time">4:30p</div>
         <div class="what"><h3>Pulgas Water Temple, the Peninsula's secret <span class="gem-badge">hidden</span></h3>
           <p>A hushed Greco-Roman temple over the spot where Hetch Hetchy water surfaces after 160 miles, reflecting pool, columns, almost nobody there. Five quiet minutes that feel like another country. (If it's already closing, swap in the <b>Filoli</b> gardens nearby.)</p>
@@ -217,7 +295,7 @@
           </span>
         </div>
       </div>
-      <div class="item">
+      <div class="item" data-start="2026-06-13T17:15:00-07:00">
         <div class="time">5:15p</div>
         <div class="what"><h3>Sharma's run, Sephora + Costco, blitz it</h3>
           <p>Done today so his Sunday stays clear. <b>Sephora</b> at Hillsdale, <b>Costco</b> in Redwood City, both right on the way back to Foster City.</p>
@@ -227,7 +305,7 @@
           </span>
         </div>
       </div>
-      <div class="item">
+      <div class="item" data-start="2026-06-13T18:45:00-07:00">
         <div class="time">6:45p</div>
         <div class="what"><h3>Golden-hour bayfront walk <span class="gem-badge">hidden</span></h3>
           <p>Squeeze in a calm sunset over the water at <b>Coyote Point</b> (San Mateo) or the <b>Foster City Bay Trail</b> a block from Sharma's, flat, breezy, the skyline going pink. Reset before dinner.</p>
@@ -237,7 +315,7 @@
           </span>
         </div>
       </div>
-      <div class="item">
+      <div class="item" data-start="2026-06-13T19:45:00-07:00">
         <div class="time">7:45p</div>
         <div class="what"><h3>Dinner, best meal of the trip with Sharma</h3>
           <p>Paneer tikka + sambar at <b>Curry Up Now</b> (211 S B St, San Mateo), high-protein and veg-friendly. See the <a class="inline" href="#fuel">fuel plan</a> for the numbers. Relaxed evening; Sunday's an early, focused start.</p>
@@ -264,20 +342,20 @@
       <div><b style="color:#c3aaff">Morning is for you, quietly.</b> <span>Hold the first part of the day for the Monday review prep, details in the private section below. Then head into the city.</span></div>
     </div>
     <div class="timeline">
-      <div class="item">
+      <div class="item" data-start="2026-06-14T09:00:00-07:00">
         <div class="time">9:00a</div>
         <div class="what"><h3>Focused prep block (private)</h3>
           <p>2–3 quiet hours before the city. See <a class="inline" href="#private">the private section</a> for the plan. Coffee, headphones, done by lunch.</p>
         </div>
       </div>
-      <div class="item">
+      <div class="item" data-start="2026-06-14T12:00:00-07:00">
         <div class="time">12:00p</div>
         <div class="what"><h3>Drive into San Francisco, meet Mahek</h3>
           <p>Mahek's downtown. Park once near the Embarcadero and do the day on foot + short hops.</p>
           <span class="meta"><span class="chip drive">🚗 Foster City → SF ≈ 25–35 min</span></span>
         </div>
       </div>
-      <div class="item">
+      <div class="item" data-start="2026-06-14T12:30:00-07:00">
         <div class="time">12:30p</div>
         <div class="what"><h3>Ferry Building lunch + Embarcadero</h3>
           <p>Grab a tofu + edamame box at <b>DELICA</b> inside the marketplace (see <a class="inline" href="#fuel">fuel plan</a>), eat by the water, then walk the Embarcadero north.</p>
@@ -287,7 +365,7 @@
           </span>
         </div>
       </div>
-      <div class="item">
+      <div class="item" data-start="2026-06-14T13:30:00-07:00">
         <div class="time">1:30p</div>
         <div class="what"><h3>Filbert Steps + Grace Marchant Garden → Coit Tower <span class="gem-badge">hidden</span></h3>
           <p>A secret wooden stairway climbing through a flower jungle and hidden cottages up to Coit Tower, wild parrots overhead, sweeping bay views at the top. One of SF's best-kept walks.</p>
@@ -297,7 +375,7 @@
           </span>
         </div>
       </div>
-      <div class="item">
+      <div class="item" data-start="2026-06-14T14:45:00-07:00">
         <div class="time">2:45p</div>
         <div class="what"><h3>North Beach, Caffè Trieste + City Lights <span class="gem-badge">hidden</span></h3>
           <p>Espresso at <b>Caffè Trieste</b>, the original Beat-era café, then browse <b>City Lights</b> books. Two-block walk from the steps.</p>
@@ -307,7 +385,7 @@
           </span>
         </div>
       </div>
-      <div class="item">
+      <div class="item" data-start="2026-06-14T15:45:00-07:00">
         <div class="time">3:45p</div>
         <div class="what"><h3>Palace of Fine Arts → the Wave Organ <span class="gem-badge">hidden</span></h3>
           <p>Short drive to the dreamy <b>Palace of Fine Arts</b>, then walk the jetty to the <b>Wave Organ</b>, a sculpture of pipes that literally plays the bay's swells. Almost nobody knows it's there.</p>
@@ -317,7 +395,7 @@
           </span>
         </div>
       </div>
-      <div class="item">
+      <div class="item" data-start="2026-06-14T16:45:00-07:00">
         <div class="time">4:45p</div>
         <div class="what"><h3>Lands End trail + the hidden Labyrinth <span class="gem-badge">hidden</span></h3>
           <p>Cliffside trail with full Golden Gate Bridge views, out to the <b>Lands End Labyrinth</b> at Eagle's Point, a stone maze on a bluff over the Pacific that most visitors walk right past.</p>
@@ -327,14 +405,14 @@
           </span>
         </div>
       </div>
-      <div class="item">
+      <div class="item" data-start="2026-06-14T18:15:00-07:00">
         <div class="time">6:15p</div>
         <div class="what"><h3>Sunset at Tank Hill, locals' viewpoint <span class="gem-badge">hidden</span></h3>
           <p>Skip the Twin Peaks crowds for <b>Tank Hill</b>, a small rocky outcrop with an arguably better 360° of the whole city as it lights up. Quiet, magic at golden hour.</p>
           <span class="meta"><a class="chip gem" href="https://maps.google.com/?q=Tank+Hill+San+Francisco" target="_blank" rel="noopener">🌇 Tank Hill</a></span>
         </div>
       </div>
-      <div class="item">
+      <div class="item" data-start="2026-06-14T19:30:00-07:00">
         <div class="time">7:30p</div>
         <div class="what"><h3>Dinner with Mahek, then back to Foster City</h3>
           <p>Dinner at <b>Greens Restaurant</b> (Fort Mason, Bldg A), high-protein veg with bay views, see the <a class="inline" href="#fuel">fuel plan</a>. Wrap at a reasonable hour, Monday's early and important. Light prep review before bed.</p>
@@ -361,32 +439,32 @@
       <div><b>Senior Leadership Review, very important. Do not book over this.</b> <span>Hard block, full focus. Hands off until it's done.</span></div>
     </div>
     <div class="timeline">
-      <div class="item">
+      <div class="item" data-start="2026-06-15T07:30:00-07:00">
         <div class="time">7:30a</div>
         <div class="what"><h3>Quiet start, set up, coffee</h3>
           <p>Good light, stable wifi, water within reach, phone on silent. Be ready 15 min early.</p>
         </div>
       </div>
-      <div class="item">
+      <div class="item" data-start="2026-06-15T08:00:00-07:00">
         <div class="time">8:00a–12:00p</div>
         <div class="what"><h3>🔒 Senior Leadership Review · 4 hours</h3>
           <p>Blocked. No driving, no errands, no plans. Everything else today bends around this.</p>
         </div>
       </div>
-      <div class="item">
+      <div class="item" data-start="2026-06-15T12:30:00-07:00">
         <div class="time">12:30p</div>
         <div class="what"><h3>Exhale + late lunch</h3>
           <p>Refuel at <b>Sweetgreen</b> (Hillsdale, San Mateo), then decompress. If there's energy, one light thing: a short Bay walk or a final coffee with whoever's around.</p>
         </div>
       </div>
-      <div class="item">
+      <div class="item" data-start="2026-06-15T18:30:00-07:00">
         <div class="time">~6:30p</div>
         <div class="what"><h3>Return rental + head to SJC</h3>
           <p>Fuel up, drop the car, target security by ~8:00p for a 10:00p flight.</p>
           <span class="meta"><span class="chip drive">🚗 Foster City → SJC ≈ 30 min</span></span>
         </div>
       </div>
-      <div class="item">
+      <div class="item" data-start="2026-06-15T22:00:00-07:00">
         <div class="time">10:00p</div>
         <div class="what"><h3>✈️ Fly home</h3>
           <p>That's a wrap on the Bay.</p>
@@ -519,5 +597,96 @@
     Built as a private plan · Jun 13–15, 2026 · <span style="opacity:.7">not indexed, not shared</span>
   </footer>
 </div>
+<script>
+(function(){
+  var PT = 'America/Los_Angeles';
+  // optional preview override: ?now=2026-06-13T14:00:00-07:00
+  var qp = new URLSearchParams(location.search).get('now');
+  function now(){ return qp ? new Date(qp) : new Date(); }
+
+  var nodes = Array.prototype.slice.call(document.querySelectorAll('.item[data-start]'));
+  var stops = nodes.map(function(el){
+    var h3 = el.querySelector('h3').cloneNode(true);
+    var b = h3.querySelector('.gem-badge, .now-badge'); if(b) b.remove();
+    var sec = el.closest('section');
+    var day = sec && sec.querySelector('.day-head h2') ? sec.querySelector('.day-head h2').textContent.trim() : '';
+    return {
+      el: el,
+      start: new Date(el.getAttribute('data-start')),
+      label: h3.textContent.trim(),
+      time: (el.querySelector('.time')||{}).textContent || '',
+      day: day
+    };
+  }).sort(function(a,b){ return a.start - b.start; });
+
+  var clockEl = document.getElementById('clock'),
+      nowEl   = document.getElementById('nowAct'),
+      nextEl  = document.getElementById('nextAct'),
+      goBtn   = document.getElementById('goNow'),
+      liveEl  = document.getElementById('live');
+  var target = null; // element "go to now" jumps to
+
+  function fmtClock(d){
+    try{
+      return new Intl.DateTimeFormat('en-US',{timeZone:PT,weekday:'short',hour:'numeric',minute:'2-digit'}).format(d) + ' PT';
+    }catch(e){ return d.toLocaleTimeString(); }
+  }
+  function rel(ms){
+    var s=Math.max(0,Math.round(ms/1000)), d=Math.floor(s/86400), h=Math.floor((s%86400)/3600), m=Math.floor((s%3600)/60);
+    if(d>0) return 'in '+d+'d '+h+'h';
+    if(h>0) return 'in '+h+'h '+m+'m';
+    return 'in '+m+'m';
+  }
+
+  function render(){
+    var t = now();
+    clockEl.textContent = '· ' + fmtClock(t);
+
+    // reset classes
+    stops.forEach(function(s){ s.el.classList.remove('current','past'); var nb=s.el.querySelector('.now-badge'); if(nb) nb.remove(); });
+
+    var idx = -1;
+    for(var i=0;i<stops.length;i++){ if(stops[i].start <= t) idx=i; }
+    var last = stops[stops.length-1];
+    var flightDone = t > new Date(last.start.getTime()+90*60000); // ~after boarding
+
+    if(idx === -1){
+      // before the trip
+      var first = stops[0];
+      liveEl.style.borderColor='rgba(123,224,200,.5)';
+      nowEl.textContent = 'Trip not started';
+      nextEl.innerHTML = 'First up: <b>'+first.label+'</b> · '+first.day+' '+first.time+' ('+rel(first.start - t)+')';
+      target = first.el;
+    } else if(idx === stops.length-1 && flightDone){
+      nowEl.textContent = 'Trip complete ✈️';
+      nextEl.innerHTML = 'Hope it was a great one. Safe travels home.';
+      target = last.el;
+    } else {
+      var cur = stops[idx], nxt = stops[idx+1] || null;
+      cur.el.classList.add('current');
+      var h3 = cur.el.querySelector('h3');
+      if(h3 && !h3.querySelector('.now-badge')){ var nb=document.createElement('span'); nb.className='now-badge'; nb.textContent='now'; h3.appendChild(nb); }
+      stops.forEach(function(s,i){ if(i<idx) s.el.classList.add('past'); });
+      nowEl.textContent = cur.label;
+      if(nxt){
+        nextEl.innerHTML = 'Up next: <b>'+nxt.label+'</b> · '+nxt.day+' '+nxt.time+' ('+rel(nxt.start - t)+')';
+      } else {
+        nextEl.innerHTML = 'Last stop of the trip.';
+      }
+      target = cur.el;
+    }
+  }
+
+  goBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    if(target){ target.scrollIntoView({behavior:'smooth', block:'center'});
+      target.style.transition='background .4s'; var o=target.style.background;
+      target.style.background='rgba(255,122,69,.25)'; setTimeout(function(){ target.style.background=o; },700); }
+  });
+
+  render();
+  setInterval(render, 30000);
+})();
+</script>
 </body>
 </html>
