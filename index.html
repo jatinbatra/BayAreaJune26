@@ -128,6 +128,10 @@
   .checklist label:last-child{border-bottom:none}
   .checklist input{margin-top:3px; width:16px; height:16px; accent-color:var(--sf)}
   .checklist .c{color:var(--muted); font-size:12.5px}
+  .checklist h3{margin:16px 0 4px; font-size:11px; text-transform:uppercase; letter-spacing:.12em; color:var(--sf); font-weight:700}
+  .checklist h3:first-of-type{margin-top:4px}
+  .keyinfo .m .dish{display:flex; justify-content:space-between; gap:10px}
+  .keyinfo .blank{color:var(--muted); border-bottom:1px dashed var(--line); min-width:90px; text-align:right}
 
   .fuel{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:20px; margin-bottom:18px}
   .fuel h2{margin:0 0 4px; font-family:Georgia,serif; font-weight:600; font-size:18px}
@@ -185,6 +189,7 @@
       <a class="pill" href="#sun">🌉 <b>Sun</b> · Mahek in SF</a>
       <a class="pill" href="#mon">🔒 <b>Mon</b> · Blocked AM + fly home</a>
       <a class="pill" href="#active">🚴 <b>Active</b> · swaps & add-ons</a>
+      <a class="pill" href="#planb">🧭 <b>Plan B</b></a>
       <a class="pill" href="#fuel">🥗 <b>Food</b></a>
     </div>
     <div class="legend">
@@ -617,16 +622,107 @@
     </div>
   </section>
 
+  <!-- CONTINGENCIES -->
+  <section class="fuel" id="planb">
+    <h2>🧭 Contingencies · Plan B</h2>
+    <p class="lead">If something slips, here's the fallback. The non-negotiable anchors are <b>Sharma's shopping + both dinners</b> and the <b>Monday review</b>; everything else flexes.</p>
+    <div class="meal-grid">
+
+      <div class="mcard">
+        <h4>✈️ Flight lands late</h4>
+        <div class="m"><div class="dish">Drop <b>Pulgas + the sunset walk</b> first and shrink the hike to the lower out-and-back. Protect the Sharma dinner and the Costco/Sephora run, those are the day.</div></div>
+      </div>
+
+      <div class="mcard">
+        <h4>🌫️ Rain or heavy fog</h4>
+        <div class="dish" style="font-size:13px;color:var(--ink)">Redwood trail turns muddy and the coast socks in. Pull Sunday's SF list forward, do indoor <b>Filoli</b>, or wait out the "June Gloom", it usually burns off by noon. Save the bridge bike for a clear window.</div>
+      </div>
+
+      <div class="mcard">
+        <h4>🔒 Monday review tech fails</h4>
+        <div class="m"><div class="dish">Test wifi + camera <b>Sunday night</b>. Backup: phone hotspot + laptop tether. Plan C: the dial-in number on a charged phone, and one quiet fallback spot (hotel business room / nearby library) scoped in advance.</div></div>
+      </div>
+
+      <div class="mcard">
+        <h4>🚗 SF traffic + parking</h4>
+        <div class="m"><div class="dish">101 and the bridge clog midday, leave a 15-min buffer. Park once in a <b>garage</b>, never on the street, and leave <b>nothing visible</b> in the car (break-ins are common, especially Lands End lots).</div></div>
+      </div>
+
+      <div class="mcard">
+        <h4>📵 Mahek reschedules</h4>
+        <div class="m"><div class="dish">Sunday flips to a solo active day: <b>bike the GG bridge</b> or <b>Marin Headlands</b>, then an easy SF loop. Or pull more review prep forward and bank the rest.</div></div>
+      </div>
+
+      <div class="mcard">
+        <h4>🙌 Sharma is free Sunday after all</h4>
+        <div class="m"><div class="dish">Bonus day: bring him into the SF plan, or do <b>Marin Headlands + Muir Woods</b> together before you meet Mahek.</div></div>
+      </div>
+
+      <div class="mcard">
+        <h4>🥵 Running long / legs cooked</h4>
+        <div class="m"><div class="dish">Cut from the bottom: sunset walk → Pulgas → Skyline stop. Don't torch your legs before Monday. A short lagoon paddle beats an over-long hike.</div></div>
+      </div>
+
+      <div class="mcard">
+        <h4>🚫 Closures or long lines</h4>
+        <div class="m"><div class="dish">Costco/Sephora are worst midday weekends, hit them at open or near close. Pulgas closed → <b>Filoli</b> or <b>Sawyer Camp Trail</b>. Restaurant slammed → grocery + a lagoon picnic.</div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GOOD TO KNOW + KEY INFO -->
+  <section class="fuel" id="info">
+    <h2>ℹ️ Good to know + key info</h2>
+    <div class="meal-grid">
+      <div class="mcard">
+        <h4>Bay Area survival notes</h4>
+        <div class="m"><div class="dish">🌉 <b>Tolls are electronic</b>, no cash. GG Bridge bills the rental's plate; expect a small rental toll fee.</div></div>
+        <div class="m"><div class="dish">🔓 <b>Car break-ins are real.</b> Trunk everything, take valuables with you at every stop.</div></div>
+        <div class="m"><div class="dish">🧥 <b>June is cool + foggy</b> (55–68°F), windy at the coast and bridge. Always carry a layer.</div></div>
+        <div class="m"><div class="dish">⛽ <b>Refuel before SJC</b> to dodge the rental refuel surcharge.</div></div>
+        <div class="m"><div class="dish">📶 <b>Save maps offline</b> (Peninsula + SF). Purisima/coast have dead zones.</div></div>
+      </div>
+      <div class="mcard keyinfo">
+        <h4>Fill these in before you fly</h4>
+        <div class="m"><div class="dish">Outbound flight # <span class="blank">&nbsp;</span></div></div>
+        <div class="m"><div class="dish">Rental confirmation <span class="blank">&nbsp;</span></div></div>
+        <div class="m"><div class="dish">Sharma's hotel + room <span class="blank">&nbsp;</span></div></div>
+        <div class="m"><div class="dish">Mahek's number <span class="blank">&nbsp;</span></div></div>
+        <div class="m"><div class="dish">🔒 Monday review link / dial-in <span class="blank">&nbsp;</span></div></div>
+        <div class="m"><div class="dish">Return flight: <b>Mon 10:00p, SJC</b></div></div>
+      </div>
+    </div>
+  </section>
+
   <!-- CHECKLIST -->
   <section class="checklist">
     <h2>Don't-forget checklist</h2>
-    <label><input type="checkbox"> <span>Rental confirmation + driver's license<span class="c"> · keep ready at the SJC counter</span></span></label>
-    <label><input type="checkbox"> <span>Sharma's Costco + Sephora list<span class="c"> · do it Saturday, frees up his Sunday</span></span></label>
-    <label><input type="checkbox"> <span>Layers + trail/walking shoes<span class="c"> · the hills and SF run cool and breezy even in June</span></span></label>
-    <label><input type="checkbox"> <span>Grocery stock-up run (Safeway or Trader Joe's)<span class="c"> · hotel breakfasts + trail snacks: eggs, yogurt, Core Power, fruit</span></span></label>
+
+    <h3>Documents &amp; car</h3>
+    <label><input type="checkbox"> <span>Driver's license + rental confirmation<span class="c"> · ready at the SJC counter</span></span></label>
+    <label><input type="checkbox"> <span>Credit card on the rental + a payment app<span class="c"> · for electronic tolls</span></span></label>
+    <label><input type="checkbox"> <span>Google Maps saved offline<span class="c"> · Peninsula + SF + trailheads</span></span></label>
+
+    <h3>Monday review (private)</h3>
+    <label><input type="checkbox"> <span>🔒 8a–12p held, nothing booked over it</span></label>
+    <label><input type="checkbox"> <span>Wifi + camera + mic tested Sunday night<span class="c"> · plus hotspot backup</span></span></label>
+    <label><input type="checkbox"> <span>Charger, quiet room, dial-in number on phone<span class="c"> · fallback spot scoped</span></span></label>
+
+    <h3>Outdoors &amp; active</h3>
+    <label><input type="checkbox"> <span>Layers + trail/walking shoes<span class="c"> · hills and SF run cool and breezy in June</span></span></label>
+    <label><input type="checkbox"> <span>Water + reusable bottle<span class="c"> · the hike is real</span></span></label>
+    <label><input type="checkbox"> <span>Grocery stock-up run (Safeway or Trader Joe's)<span class="c"> · hotel breakfasts + trail snacks</span></span></label>
+
+    <h3>People &amp; plans</h3>
+    <label><input type="checkbox"> <span>Confirm Saturday window + shopping list with Sharma</span></label>
     <label><input type="checkbox"> <span>Confirm Sunday window with Mahek (SF downtown)<span class="c"> · afternoon onward</span></span></label>
-    <label><input type="checkbox"> <span>🔒 Monday 8a–12p held + tested setup<span class="c"> · wifi, camera, charger, quiet room</span></span></label>
-    <label><input type="checkbox"> <span>Refuel + return rental before SJC<span class="c"> · security by ~8:00p</span></span></label>
+    <label><input type="checkbox"> <span>Reserve Muir Woods parking <span class="c"> · only if you do the Marin swap</span></span></label>
+
+    <h3>Departure (Monday)</h3>
+    <label><input type="checkbox"> <span>Refuel + return rental<span class="c"> · before SJC</span></span></label>
+    <label><input type="checkbox"> <span>At security by ~8:00p<span class="c"> · for the 10:00p flight</span></span></label>
+    <label><input type="checkbox"> <span>Sweep the hotel room + car for chargers/bags</span></label>
   </section>
 
   <footer>
